@@ -1,0 +1,15 @@
+
+> solarcoffee.frontend@0.1.0 serve D:\Programowanie\projekty_biezace\SolarCoffee\solarcoffee.frontend
+> vue-cli-service serve
+
+ INFO  Starting development server...
+ DONE  Compiled successfully in 1755ms22:54:14
+
+
+  App running at:
+  - Local:   http://localhost:8080/ 
+  - Network: http://192.168.0.104:8080/
+
+  Note that the development build is not optimized.
+  To create a production build, run npm run build.
+
