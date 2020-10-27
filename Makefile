@@ -1,3 +1,4 @@
+# Project Variables
 PROJECT_NAME ?= SolarCoffee
 ORG_NAME ?= SolarCoffee
 REPO_NAME ?= SolarCoffee

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SolarCoffee.Data;
 using Microsoft.EntityFrameworkCore;
+using SolarCoffee.Services.Product;
 
 namespace SolarCoffee.Web
 {
@@ -28,7 +29,6 @@ namespace SolarCoffee.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
         
             services.AddDbContext<SolarDbContext>(optionsAction=>{
@@ -36,7 +36,8 @@ namespace SolarCoffee.Web
                 optionsAction.UseNpgsql(Configuration.GetConnectionString("solar.dev"));
             });
 
-
+            services.AddTransient<IProductService, ProductService>();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SolarCoffee.Web", Version = "v1" });
@@ -53,11 +54,9 @@ namespace SolarCoffee.Web
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SolarCoffee.Web v1"));
             }
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseHttpsRedirection(); 
+            app.UseRouting(); 
+            app.UseAuthorization(); 
 
             app.UseEndpoints(endpoints =>
             {
