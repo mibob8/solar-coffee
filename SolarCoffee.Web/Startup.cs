@@ -14,11 +14,15 @@ using Microsoft.OpenApi.Models;
 using SolarCoffee.Data;
 using Microsoft.EntityFrameworkCore;
 using SolarCoffee.Services.Product;
+using SolarCoffee.Services.Customer;
+using SolarCoffee.Services.Inventory;
+using SolarCoffee.Services.Order;
 
 namespace SolarCoffee.Web
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,14 +34,20 @@ namespace SolarCoffee.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-        
-            services.AddDbContext<SolarDbContext>(optionsAction=>{
+
+            services.AddDbContext<SolarDbContext>(optionsAction =>
+            {
                 optionsAction.EnableDetailedErrors();
                 optionsAction.UseNpgsql(Configuration.GetConnectionString("solar.dev"));
             });
 
+
             services.AddTransient<IProductService, ProductService>();
-            
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IInventoryService, InventoryService>();
+            services.AddTransient<IOrderService, OrderService>();
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SolarCoffee.Web", Version = "v1" });
@@ -54,9 +64,9 @@ namespace SolarCoffee.Web
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SolarCoffee.Web v1"));
             }
 
-            app.UseHttpsRedirection(); 
-            app.UseRouting(); 
-            app.UseAuthorization(); 
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

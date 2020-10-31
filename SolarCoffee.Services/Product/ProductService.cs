@@ -17,7 +17,7 @@ namespace SolarCoffee.Services.Product
         }
 
         public ServiceResponse<Data.Model.Product> ArchiveProduct(int id)
-        { 
+        {
             try
             {
                 var product = dbContext.Products.Find(id);
@@ -33,14 +33,15 @@ namespace SolarCoffee.Services.Product
                 };
             }
             catch (System.Exception e)
-            { 
-                return new ServiceResponse<Data.Model.Product>{
-                    Data = null, 
+            {
+                return new ServiceResponse<Data.Model.Product>
+                {
+                    Data = null,
                     Time = DateTime.UtcNow,
                     Message = e.StackTrace,
                     isSuccess = false,
                 };
-            } 
+            }
         }
 
         public ServiceResponse<Data.Model.Product> CreateProduct(Data.Model.Product product)

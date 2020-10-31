@@ -10,5 +10,6 @@ namespace SolarCoffee.Data.Model
         public string FirstName { get; set; }
 
         public CustomerAddress Adress { get; set; }
+        public CustomerAddress PrimaryAddress { get; set; }
     }
 }
